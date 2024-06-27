@@ -91,9 +91,10 @@ def main():
     def reporte_csv():
         with open("reporte_banco.csv", "w", newline="") as file:
             writer = csv.writer(file)
-            writer.writerow(["Cliente", "Saldo"])
+            writer.writerow(["Cliente", "Saldo ($)"])
             for cliente in datos_clientes:
-                writer.writerow([cliente["cliente"], cliente["saldo"]])
+                formatted_saldo = f"{cliente['saldo']:,}"
+                writer.writerow([cliente["cliente"], formatted_saldo])
         print("El reporte ha sido creado con exito")
 
 #opcion 7 salir del programa   
