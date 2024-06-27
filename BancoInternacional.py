@@ -66,22 +66,22 @@ def main():
         for saldo_alto in datos_clientes:
                 saldo_mas_alto = max(datos_clientes, key=lambda saldo_alto: saldo_alto["saldo"])
                 if saldo_mas_alto["saldo"] == saldo_alto["saldo"]:
-                    print("\nCliente con saldo mas alto : ")
-                    print(f"- {saldo_mas_alto['cliente']}, Saldo Total : ${saldo_mas_alto['saldo']:,}\n")
+                    print("\nCliente con saldo mas alto: ")
+                    print(f"- {saldo_mas_alto['cliente']}, Saldo Total: ${saldo_mas_alto['saldo']:,}\n")
 
 #opcion 3 saldo mas bajo
     def saldo_mas_bajo():
         for saldo_bajo in datos_clientes:
                 saldo_mas_bajo = min(datos_clientes, key=lambda saldo_bajo: saldo_bajo["saldo"])
                 if saldo_mas_bajo["saldo"] == saldo_bajo["saldo"]:
-                    print("\nCliente con saldo mas bajo : ")
-                    print(f"- {saldo_mas_bajo['cliente']}, Saldo Total : ${saldo_mas_bajo['saldo']:,}\n")
+                    print("\nCliente con saldo mas bajo: ")
+                    print(f"- {saldo_mas_bajo['cliente']}, Saldo Total: ${saldo_mas_bajo['saldo']:,}\n")
 
 #opcion 4 saldo promedio
     def saldo_promedio():
         saldo_p = [cliente["saldo"] for cliente in datos_clientes]
         saldo_promedio = statistics.mean(saldo_p)
-        print(f"\nEl saldo promedio es: ${saldo_promedio:,}")
+        print(f"\nEl saldo promedio de los clientes es: ${saldo_promedio:,}")
 
 #opcion 5 media geometrica
     def media_geometrica():
