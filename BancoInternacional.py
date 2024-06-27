@@ -90,14 +90,18 @@ def main():
 #opcion 6 reporte csv
     def reporte_csv():
         datos_clientes.sort(key=lambda cliente: cliente['saldo'], reverse=True)
-
+        deduccion = float(10)
+        deduccion /= 100
         with open("reporte_banco.csv", "w", newline="") as file:
             writer = csv.writer(file)
-            writer.writerow(["Cliente", "Saldo ($)"])
+            writer.writerow(["Cliente", "Saldo ($)" , "Saldo Deducido Imposicion($)"])
             for cliente in datos_clientes:
                 formatted_saldo = f" ${cliente['saldo']:,} "
-                writer.writerow([cliente["cliente"], formatted_saldo])
-        print("El reporte ha sido creado con exito")
+                saldo_numerico = float(formatted_saldo.replace(",", "").replace("$", ""))
+                saldo_deducido = saldo_numerico * (1 - deduccion)
+                formatted_saldo_deducido = f" ${saldo_deducido:,.0f}"
+                writer.writerow([cliente["cliente"], formatted_saldo,   formatted_saldo_deducido])
+            print("El reporte ha sido creado con exito")
 
 #opcion 7 salir del programa   
     def salir():
