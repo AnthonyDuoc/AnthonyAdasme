@@ -1,20 +1,19 @@
 import statistics
 import math
 import csv
-import os
 
 #Lista de clientes y sus saldos correspondientes 
 datos_clientes = [
-    {"cliente": "Mateo", "saldo": 350000},
-    {"cliente": "Berta", "saldo": 800000},
-    {"cliente": "Paula", "saldo": 600000},
-    {"cliente": "Angelina", "saldo": 200000},
-    {"cliente": "Michael", "saldo": 120000},
-    {"cliente": "Fabian", "saldo": 500000},
-    {"cliente": "Eduardo", "saldo": 550000},
-    {"cliente": "Fabiola", "saldo": 720000},
-    {"cliente": "Amalia", "saldo": 650000},
-    {"cliente": "Magda", "saldo": 400000},
+    {"cliente": "Manuel Olivares", "saldo": 350000},
+    {"cliente": "Berta Soto", "saldo": 800000},
+    {"cliente": "Paula Correa", "saldo": 600000},
+    {"cliente": "Angelina Castillo", "saldo": 200000},
+    {"cliente": "Michael Adasme", "saldo": 120000},
+    {"cliente": "Fabian Villalobos", "saldo": 500000},
+    {"cliente": "Eduardo Gallardo", "saldo": 550000},
+    {"cliente": "Christian Olivares", "saldo": 720000},
+    {"cliente": "Elias Arana", "saldo": 650000},
+    {"cliente": "Victor Adasme", "saldo": 400000},
 ]
 
 #creacion de menu
@@ -34,11 +33,14 @@ def main():
         return option
     
 #opcion 1 saldo clasificados en rangos
+
+#creando tuplas para clasificar los saldos y rangos 
     def saldos_rangos():
         saldo_bajos = [(cliente["cliente"], cliente["saldo"]) for cliente in datos_clientes if cliente["saldo"] < 250000]
         saldo_medios = [(cliente["cliente"], cliente["saldo"]) for cliente in datos_clientes if cliente["saldo"] >= 250000 and cliente["saldo"] <= 500000]
         saldo_altos = [(cliente["cliente"], cliente["saldo"]) for cliente in datos_clientes if cliente["saldo"] > 500000]
 
+#poniendo el orden de los saldos de menor a mayor
         saldo_bajos.sort(key = lambda x : x[1])
         saldo_medios.sort(key = lambda x : x[1])
         saldo_altos.sort(key = lambda x : x[1])
@@ -46,15 +48,15 @@ def main():
         print("Saldos en rangos: \n")
         print(f"Saldos bajos:")
         for cliente, saldo in saldo_bajos:
-            print(f"- {cliente}: {saldo}")
+            print(f"- {cliente}: {saldo}$")
 
         print(f"\nSaldos medios:")
         for cliente, saldo in saldo_medios:
-            print(f"- {cliente}: {saldo}")
+            print(f"- {cliente}: {saldo}$")
 
         print(f"\nSaldos altos:")
         for cliente, saldo in saldo_altos:
-            print(f"- {cliente}: {saldo}")
+            print(f"- {cliente}: {saldo}$")
 
 #opcion 2 saldo mas alto
     def saldo_mas_alto():
@@ -81,8 +83,9 @@ def main():
 #opcion 5 media geometrica
     def media_geometrica():
         saldo_g = [cliente["saldo"] for cliente in datos_clientes]
-        saldo_geometrico = statistics.geometric_mean(saldo_g)
-        print(f"La media geometrica es: {saldo_geometrico}")
+        log_saldo = sum(math.log(saldo) for saldo in saldo_g)
+        saldo_geometrico = math.exp(log_saldo / len(saldo_g))
+        print(f"\nLa media geometrica es: {saldo_geometrico}")
 
 #opcion 6 reporte csv
     def reporte_csv():
