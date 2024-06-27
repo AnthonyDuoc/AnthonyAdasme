@@ -124,7 +124,7 @@ def main():
         elif option == 6:
             reporte_csv()
         elif option == 7:
-            print("Gracias por usar el programa")
+            print("Gracias por usar nuestro servicio")
             exit()
         else:
             print("Opcion no valida")
