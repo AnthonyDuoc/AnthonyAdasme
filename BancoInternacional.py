@@ -48,15 +48,18 @@ def main():
         print("Saldos en rangos: \n")
         print(f"Saldos bajos:")
         for cliente, saldo in saldo_bajos:
-            print(f"- {cliente}: ${saldo}")
+            formatted_saldo = f"{saldo:,}"
+            print(f"- {cliente}: ${formatted_saldo}")
 
         print(f"\nSaldos medios:")
         for cliente, saldo in saldo_medios:
-            print(f"- {cliente}: ${saldo}")
+            formatted_saldo = f"{saldo:,}"
+            print(f"- {cliente}: ${formatted_saldo}")
 
         print(f"\nSaldos altos:")
         for cliente, saldo in saldo_altos:
-            print(f"- {cliente}: ${saldo}")
+            formatted_saldo = f"{saldo:,}"
+            print(f"- {cliente}: ${formatted_saldo}")
 
 #opcion 2 saldo mas alto
     def saldo_mas_alto():
@@ -64,7 +67,7 @@ def main():
                 saldo_mas_alto = max(datos_clientes, key=lambda saldo_alto: saldo_alto["saldo"])
                 if saldo_mas_alto["saldo"] == saldo_alto["saldo"]:
                     print("\nCliente con saldo mas alto : ")
-                    print(f"- {saldo_mas_alto['cliente']}, Saldo Total : ${saldo_mas_alto['saldo']}\n")
+                    print(f"- {saldo_mas_alto['cliente']}, Saldo Total : ${saldo_mas_alto['saldo']:,}\n")
 
 #opcion 3 saldo mas bajo
     def saldo_mas_bajo():
@@ -72,13 +75,13 @@ def main():
                 saldo_mas_bajo = min(datos_clientes, key=lambda saldo_bajo: saldo_bajo["saldo"])
                 if saldo_mas_bajo["saldo"] == saldo_bajo["saldo"]:
                     print("\nCliente con saldo mas bajo : ")
-                    print(f"- {saldo_mas_bajo['cliente']}, Saldo Total : ${saldo_mas_bajo['saldo']}\n")
+                    print(f"- {saldo_mas_bajo['cliente']}, Saldo Total : ${saldo_mas_bajo['saldo']:,}\n")
 
 #opcion 4 saldo promedio
     def saldo_promedio():
         saldo_p = [cliente["saldo"] for cliente in datos_clientes]
         saldo_promedio = statistics.mean(saldo_p)
-        print(f"\nEl saldo promedio es: ${saldo_promedio}")
+        print(f"\nEl saldo promedio es: ${saldo_promedio:,}")
 
 #opcion 5 media geometrica
     def media_geometrica():
