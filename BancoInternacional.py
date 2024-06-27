@@ -89,6 +89,8 @@ def main():
 
 #opcion 6 reporte csv
     def reporte_csv():
+        datos_clientes.sort(key=lambda cliente: cliente['saldo'], reverse=True)
+
         with open("reporte_banco.csv", "w", newline="") as file:
             writer = csv.writer(file)
             writer.writerow(["Cliente", "Saldo ($)"])
