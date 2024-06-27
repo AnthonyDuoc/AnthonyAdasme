@@ -21,7 +21,7 @@ datos_clientes = [
 def main():
     def menu():
         print(
-            "Gestion Clientes Banco Internacional\n"
+            "\nGestion Clientes Banco Internacional :\n"
             "1. Mostrar saldos clasificados en rangos\n"
             "2. Saldo mas alto\n"
             "3. Saldo mas bajo\n"
@@ -32,43 +32,65 @@ def main():
             )
         option = int(input("Ingrese una opcion: "))
         return option
-      
-
+    
     def saldos_rangos():
-        print("Saldos clasificados en rangos\n")
-        for rango in datos_clientes:
-            saldo = rango["saldo"]
-            if saldo <= 250000:
-                print("Clientes con saldo menor o igual a 250.000: ")
-                print(f"{rango['cliente']} tiene un saldo de {saldo}")
-            if saldo > 250000 and saldo <= 500000: 
-                print("Clientes con saldo entre 250.000 y 500.000: ")
-                print(f"{rango['cliente']} tiene un saldo de {saldo}")
-            else:
-                print("Clientes con saldo mayor a 500.000: ")
-                print(f"{rango['cliente']} tiene un saldo de {saldo}")
+        saldo_bajos = [(cliente["cliente"], cliente["saldo"]) for cliente in datos_clientes if cliente["saldo"] < 250000]
+        saldo_medios = [(cliente["cliente"], cliente["saldo"]) for cliente in datos_clientes if cliente["saldo"] >= 250000 and cliente["saldo"] <= 500000]
+        saldo_altos = [(cliente["cliente"], cliente["saldo"]) for cliente in datos_clientes if cliente["saldo"] > 500000]
 
+        saldo_bajos.sort(key = lambda x : x[1])
+        saldo_medios.sort(key = lambda x : x[1])
+        saldo_altos.sort(key = lambda x : x[1])
+
+        print("Saldos en rangos: \n")
+        print(f"Saldos bajos:")
+        for cliente, saldo in saldo_bajos:
+            print(f"- {cliente}: {saldo}")
+
+        print(f"\nSaldos medios:")
+        for cliente, saldo in saldo_medios:
+            print(f"- {cliente}: {saldo}")
+
+        print(f"\nSaldos altos:")
+        for cliente, saldo in saldo_altos:
+            print(f"- {cliente}: {saldo}")
+
+        
     def saldo_mas_alto():
         for saldo_alto in datos_clientes:
                 saldo_mas_alto = max(datos_clientes, key=lambda saldo_alto: saldo_alto["saldo"])
                 if saldo_mas_alto["saldo"] == saldo_alto["saldo"]:
-                    print(f"El cliente con el saldo mas alto es {saldo_mas_alto['cliente']}, Saldo Total :{saldo_mas_alto['saldo']}$")
+                    print("\nCliente con saldo mas alto : ")
+                    print(f"- {saldo_mas_alto['cliente']}, Saldo Total : {saldo_mas_alto['saldo']}$\n")
 
     def saldo_mas_bajo():
         for saldo_bajo in datos_clientes:
                 saldo_mas_bajo = min(datos_clientes, key=lambda saldo_bajo: saldo_bajo["saldo"])
                 if saldo_mas_bajo["saldo"] == saldo_bajo["saldo"]:
-                    print(f"El cliente con el saldo mas bajo es {saldo_mas_bajo['cliente']}, Saldo Total : {saldo_mas_bajo['saldo']}$")
+                    print("\nCliente con saldo mas bajo : ")
+                    print(f"- {saldo_mas_bajo['cliente']}, Saldo Total : {saldo_mas_bajo['saldo']}$\n")
 
     def saldo_promedio():
         saldo_p = [cliente["saldo"] for cliente in datos_clientes]
         saldo_promedio = statistics.mean(saldo_p)
-        print(f"El saldo promedio es: {saldo_promedio}")
+        print(f"\nEl saldo promedio es: {saldo_promedio}$")
     
     def media_geometrica():
         saldo_g = [cliente["saldo"] for cliente in datos_clientes]
         saldo_geometrico = statistics.geometric_mean(saldo_g)
         print(f"La media geometrica es: {saldo_geometrico}")
+
+    def reporte_csv():
+        with open("reporte_banco.csv", "w", newline="") as file:
+            writer = csv.writer(file)
+            writer.writerow(["Cliente", "Saldo"])
+            for cliente in datos_clientes:
+                writer.writerow([cliente["cliente"], cliente["saldo"]])
+        print("El reporte ha sido creado con exito")
+    
+    def salir():
+        print("Gracias por usar el programa")
+        exit()
                             
     while True:
         option = menu()
@@ -86,16 +108,9 @@ def main():
             reporte_csv()
         elif option == 7:
             print("Gracias por usar el programa")
+            exit()
         else:
             print("Opcion no valida")
-            option = int(input("Ingrese una opcion: "))    
-
-
-
-
-
-
-
-
+            option = int(input("Ingrese una opcion: \n"))    
 
 main()
