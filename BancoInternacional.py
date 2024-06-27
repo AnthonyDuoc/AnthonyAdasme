@@ -94,14 +94,14 @@ def main():
         deduccion /= 100
         with open("reporte_banco.csv", "w", newline="") as file:
             writer = csv.writer(file)
-            writer.writerow(["Cliente", "Saldo ($)" , "Saldo Deducido Imposicion($)"])
+            writer.writerow(["Cliente", "Saldo Neto($)" , "Saldo Deducido Imposicion($)"])
             for cliente in datos_clientes:
-                formatted_saldo = f" ${cliente['saldo']:,} "
+                formatted_saldo = f" ${cliente['saldo']:,} " 
                 saldo_numerico = float(formatted_saldo.replace(",", "").replace("$", ""))
                 saldo_deducido = saldo_numerico * (1 - deduccion)
                 formatted_saldo_deducido = f" ${saldo_deducido:,.0f}"
                 writer.writerow([cliente["cliente"], formatted_saldo,   formatted_saldo_deducido])
-            print("El reporte ha sido creado con exito")
+            print("\nEl reporte ha sido creado con exito.")
 
 #opcion 7 salir del programa   
     def salir():
