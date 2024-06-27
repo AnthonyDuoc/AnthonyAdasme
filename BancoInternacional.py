@@ -3,7 +3,7 @@ import math
 import csv
 import os
 
-"Lista de clientes y sus saldos"
+#Lista de clientes y sus saldos correspondientes 
 datos_clientes = [
     {"cliente": "Mateo", "saldo": 350000},
     {"cliente": "Berta", "saldo": 800000},
@@ -17,7 +17,7 @@ datos_clientes = [
     {"cliente": "Magda", "saldo": 400000},
 ]
 
-"Menu"
+#creacion de menu
 def main():
     def menu():
         print(
@@ -33,6 +33,7 @@ def main():
         option = int(input("Ingrese una opcion: "))
         return option
     
+#opcion 1 saldo clasificados en rangos
     def saldos_rangos():
         saldo_bajos = [(cliente["cliente"], cliente["saldo"]) for cliente in datos_clientes if cliente["saldo"] < 250000]
         saldo_medios = [(cliente["cliente"], cliente["saldo"]) for cliente in datos_clientes if cliente["saldo"] >= 250000 and cliente["saldo"] <= 500000]
@@ -55,7 +56,7 @@ def main():
         for cliente, saldo in saldo_altos:
             print(f"- {cliente}: {saldo}")
 
-        
+#opcion 2 saldo mas alto
     def saldo_mas_alto():
         for saldo_alto in datos_clientes:
                 saldo_mas_alto = max(datos_clientes, key=lambda saldo_alto: saldo_alto["saldo"])
@@ -63,6 +64,7 @@ def main():
                     print("\nCliente con saldo mas alto : ")
                     print(f"- {saldo_mas_alto['cliente']}, Saldo Total : {saldo_mas_alto['saldo']}$\n")
 
+#opcion 3 saldo mas bajo
     def saldo_mas_bajo():
         for saldo_bajo in datos_clientes:
                 saldo_mas_bajo = min(datos_clientes, key=lambda saldo_bajo: saldo_bajo["saldo"])
@@ -70,16 +72,19 @@ def main():
                     print("\nCliente con saldo mas bajo : ")
                     print(f"- {saldo_mas_bajo['cliente']}, Saldo Total : {saldo_mas_bajo['saldo']}$\n")
 
+#opcion 4 saldo promedio
     def saldo_promedio():
         saldo_p = [cliente["saldo"] for cliente in datos_clientes]
         saldo_promedio = statistics.mean(saldo_p)
         print(f"\nEl saldo promedio es: {saldo_promedio}$")
-    
+
+#opcion 5 media geometrica
     def media_geometrica():
         saldo_g = [cliente["saldo"] for cliente in datos_clientes]
         saldo_geometrico = statistics.geometric_mean(saldo_g)
         print(f"La media geometrica es: {saldo_geometrico}")
 
+#opcion 6 reporte csv
     def reporte_csv():
         with open("reporte_banco.csv", "w", newline="") as file:
             writer = csv.writer(file)
@@ -87,11 +92,13 @@ def main():
             for cliente in datos_clientes:
                 writer.writerow([cliente["cliente"], cliente["saldo"]])
         print("El reporte ha sido creado con exito")
-    
+
+#opcion 7 salir del programa   
     def salir():
         print("Gracias por usar el programa")
         exit()
-                            
+
+#definiendo las opciones del menu                           
     while True:
         option = menu()
         if option == 1:
