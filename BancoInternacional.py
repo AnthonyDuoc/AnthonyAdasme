@@ -88,7 +88,7 @@ def main():
         saldo_g = [cliente["saldo"] for cliente in datos_clientes]
         log_saldo = sum(math.log(saldo) for saldo in saldo_g)
         saldo_geometrico = math.exp(log_saldo / len(saldo_g))
-        print(f"\nLa media geometrica es: {saldo_geometrico}")
+        print(f"\nLa media geometrica es: {saldo_geometrico:.2f}")
 
 #opcion 6 reporte csv
     def reporte_csv():
